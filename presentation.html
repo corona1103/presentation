@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品专家晋升述职 - 于涓</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #FFFFFF;
+      min-height: 100vh;
+      color: #1F2937;
+    }
+
+    .presentation {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-bottom: 100px;
+    }
+
+    .slide {
+      display: none;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      min-height: calc(100vh - 140px);
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      padding: 32px 48px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 封面样式 */
+    .slide.cover.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #FFFFFF;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .slide.cover h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      color: #6366F1;
+    }
+
+    .slide.cover .subtitle {
+      font-size: 1.2rem;
+      color: #4B5563;
+      margin-bottom: 30px;
+    }
+
+    .slide.cover .author {
+      font-size: 1rem;
+      color: #6B7280;
+      margin-top: 40px;
+    }
+
+    .slide.cover .author span {
+      background: #EEF2FF;
+      color: #6366F1;
+      padding: 6px 16px;
+      border-radius: 16px;
+    }
+
+    /* 章节封面样式 */
+    .slide.section-cover.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      background: #FFFFFF;
+      padding-top: 100px;
+    }
+
+    .slide.section-cover .section-number {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #6366F1;
+      margin-bottom: 16px;
+    }
+
+    .slide.section-cover h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1F2937;
+      border: none;
+      padding: 0;
+    }
+
+    .slide.section-cover .section-desc {
+      font-size: 0.95rem;
+      color: #6B7280;
+      max-width: 550px;
+      line-height: 1.6;
+    }
+
+    /* 内容页样式 */
+    .slide h2 {
+      font-size: 1.5rem;
+      color: #1F2937;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #6366F1;
+    }
+
+    .slide h3 {
+      font-size: 1.1rem;
+      color: #4B5563;
+      margin: 16px 0 10px;
+    }
+
+    .slide p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4B5563;
+      margin-bottom: 10px;
+    }
+
+    .slide ul {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .slide li {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #4B5563;
+      margin-bottom: 6px;
+    }
+
+    .slide li strong {
+      color: #1F2937;
+    }
+
+    /* 高亮文字 */
+    .highlight {
+      color: #6366F1;
+      font-weight: 600;
+    }
+
+    .highlight-orange {
+      color: #F97316;
+      font-weight: 600;
+    }
+
+    /* 数据卡片 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+      color: white;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /* 时间线 */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      margin: 16px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #6366F1, #8B5CF6);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: #6366F1;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+    }
+
+    .timeline-item .date {
+      font-size: 0.8rem;
+      color: #6366F1;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-item .content {
+      font-size: 0.9rem;
+      color: #4B5563;
+      line-height: 1.5;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .card-grid.two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card-grid.three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: #F9FAFB;
+      border-radius: 10px;
+      padding: 14px 18px;
+      border-left: 4px solid #6366F1;
+    }
+
+    .card.orange {
+      border-left-color: #F97316;
+    }
+
+    .card.green {
+      border-left-color: #10B981;
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      color: #1F2937;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: #6B7280;
+      margin-bottom: 0;
+    }
+
+    .card ul {
+      margin-bottom: 0;
+    }
+
+    /* 对比布局 */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 12px 0;
+    }
+
+    .compare-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+    }
+
+    .compare-box.old {
+      background: #FEF2F2;
+      border: 2px solid #FECACA;
+    }
+
+    .compare-box.new {
+      background: #ECFDF5;
+      border: 2px solid #A7F3D0;
+    }
+
+    .compare-box h4 {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .compare-box.old h4 {
+      color: #DC2626;
+    }
+
+    .compare-box.new h4 {
+      color: #059669;
+    }
+
+    .compare-box ul {
+      margin-bottom: 0;
+    }
+
+    /* 图片展示 */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .image-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #F9FAFB;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      display: block;
+      background: #F9FAFB;
+    }
+
+    .image-item .caption {
+      padding: 6px 10px;
+      background: #F9FAFB;
+      font-size: 0.75rem;
+      color: #6B7280;
+      text-align: center;
+    }
+
+    .single-image {
+      max-width: 450px;
+      margin: 12px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      background: #F9FAFB;
+    }
+
+    .single-image img {
+      width: 100%;
+      height: 280px;
+      object-fit: contain;
+      display: block;
+      background: #F9FAFB;
+    }
+
+    /* 流程图样式 */
+    .flow-steps {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0;
+      gap: 8px;
+    }
+
+    .flow-step {
+      flex: 1;
+      max-width: 180px;
+      text-align: center;
+      padding: 12px 10px;
+      background: #F9FAFB;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .flow-step::after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #6366F1;
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step .icon {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    .flow-step .title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1F2937;
+      margin-bottom: 2px;
+    }
+
+    .flow-step .desc {
+      font-size: 0.75rem;
+      color: #6B7280;
+    }
+
+    /* 目录样式 */
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: #F9FAFB;
+      border-radius: 10px;
+    }
+
+    .toc-item .num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .toc-item .text {
+      font-size: 0.9rem;
+      color: #1F2937;
+    }
+
+    /* 引用块 */
+    .quote {
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+      padding: 14px 20px;
+      border-radius: 10px;
+      border-left: 4px solid #6366F1;
+      margin: 12px 0;
+      font-size: 0.9rem;
+      color: #4338CA;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* 标签 */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .tag {
+      background: #EEF2FF;
+      color: #6366F1;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 0.75rem;
+    }
+
+    .tag.orange {
+      background: #FFF7ED;
+      color: #F97316;
+    }
+
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.85rem;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .data-table th {
+      background: #F9FAFB;
+      font-weight: 600;
+      color: #1F2937;
+    }
+
+    .data-table td {
+      color: #4B5563;
+    }
+
+    /* 导航栏 */
+    .navigation {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: #6366F1;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .nav-btn:hover {
+      background: #4F46E5;
+    }
+
+    .nav-btn:active {
+      transform: scale(0.98);
+    }
+
+    .nav-btn:disabled {
+      background: #D1D5DB;
+      cursor: not-allowed;
+    }
+
+    .page-info {
+      font-size: 1rem;
+      color: #6B7280;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6366F1, #8B5CF6);
+      transition: width 0.3s ease;
+      z-index: 101;
+    }
+
+    /* 感谢页 */
+    .slide.thanks.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      background: #FFFFFF;
+      padding-top: 120px;
+    }
+
+    .slide.thanks h2 {
+      font-size: 2.2rem;
+      color: #6366F1;
+      border: none;
+      margin-bottom: 16px;
+    }
+
+    .slide.thanks p {
+      font-size: 1.1rem;
+      color: #4B5563;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .slide {
+        padding: 24px 20px;
+      }
+
+      .slide.cover h1 {
+        font-size: 1.6rem;
+      }
+
+      .compare-grid,
+      .card-grid.two-col,
+      .card-grid.three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-steps {
+        flex-direction: column;
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .image-item img,
+      .single-image img {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="presentation">
+    <!-- 第1页：封面 -->
+    <div class="slide cover active">
+      <h1>进校产品价值回归<br>AI赋能旧场景下的新体验</h1>
+      <p class="subtitle">2.3 → 3.1 产品专家晋升述职</p>
+      <p class="author"><span>于涓</span></p>
+    </div>
+
+    <!-- 第2页：目录 -->
+    <div class="slide">
+      <h2>述职目录</h2>
+      <div class="toc-list">
+        <div class="toc-item">
+          <div class="num">1</div>
+          <div class="text">个人经历</div>
+        </div>
+        <div class="toc-item">
+          <div class="num">2</div>
+          <div class="text">关键成果：从0到1实现价值回归</div>
+        </div>
+        <div class="toc-item">
+          <div class="num">3</div>
+          <div class="text">AI实践：给用户真实价值</div>
+        </div>
+        <div class="toc-item">
+          <div class="num">4</div>
+          <div class="text">保障价值落地的工作流与机制</div>
+        </div>
+        <div class="toc-item">
+          <div class="num">5</div>
+          <div class="text">人员培养与输出</div>
+        </div>
+        <div class="toc-item">
+          <div class="num">6</div>
+          <div class="text">成长与反思</div>
+        </div>
+      </div>
+      <div class="quote">
+        核心叙事逻辑：进校产品不缺技术、不缺设备，缺的是对教学场景的深度理解和真实价值交付。我的工作核心是让产品"回归价值"——用AI技术改善教师备课、学生自学、课堂互动等传统场景，而非堆砌功能或追逐概念。
+      </div>
+    </div>
+
+    <!-- 第3页：职业发展时间线 -->
+    <div class="slide">
+      <h2>第一部分：个人经历</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">2024年9月 - 11月</div>
+          <div class="content">
+            <strong>口算宝APP</strong><br>
+            负责口算宝产品相关工作
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2024年11月 - 至今</div>
+          <div class="content">
+            <strong>ToG进校产品 - 九章爱学</strong><br>
+            主要负责大小屏产品，推动进校产品价值回归
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第4页：第二部分章节封面 -->
+    <div class="slide section-cover">
+      <div class="section-number">第二部分</div>
+      <h2>关键成果</h2>
+      <p class="section-desc">从0到1验证价值回归路径<br><br>进校产品行业普遍"交付即吃灰"，根因是价值偏离——重设备轻体验、重政绩轻教学。我的破局思路是回归真实场景需求，用"内容+工具+策略"三位一体让产品真正被用起来。</p>
+    </div>
+
+    <!-- 第5页：业务全景图 -->
+    <div class="slide">
+      <h2>业务全景图</h2>
+      <h3>产品矩阵</h3>
+      <p>覆盖<span class="highlight">课前/课中/课后</span>全场景，但重点不是"功能多"，而是<span class="highlight-orange">"每个功能解决一个真实痛点"</span></p>
+      <h3>关键里程碑</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">2024.11</div>
+          <div class="content">项目立项启动</div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2025.3</div>
+          <div class="content">产品版本1.0上线，进入3个试点校</div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2025.9</div>
+          <div class="content">完成高中全科能力覆盖</div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2026.3</div>
+          <div class="content">使用案例沉淀，解耦交付运营</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第6页：核心战绩数据 -->
+    <div class="slide">
+      <h2>核心战绩数据</h2>
+      <p>用数据证明"价值回归"有效，设备不再吃灰</p>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">10+</div>
+          <div class="label">覆盖学校</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">100+</div>
+          <div class="label">服务教师</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">1200+</div>
+          <div class="label">活跃学生</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">80%</div>
+          <div class="label">周活跃率</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">100%</div>
+          <div class="label">续班率</div>
+        </div>
+      </div>
+      <div class="image-gallery">
+        <div class="image-item">
+          <img src="05照片物料/2025.04天津教育装备展0九章爱学展台.jpeg" alt="天津教育装备展">
+          <div class="caption">2025天津教育装备展-九章爱学展台</div>
+        </div>
+        <div class="image-item">
+          <img src="05照片物料/02镇江新闻报道.pic.jpg" alt="镇江新闻报道">
+          <div class="caption">镇江学校新闻报道</div>
+        </div>
+        <div class="image-item">
+          <img src="05照片物料/0赤壁一中捐赠仪式学校大屏.jpeg" alt="捐赠仪式">
+          <div class="caption">赤壁一中捐赠仪式</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第7页：行业困境与价值偏离 -->
+    <div class="slide">
+      <h2>行业困境与价值偏离</h2>
+      <div class="quote">
+        设备使用率低的本质是"产品没有解决真实问题"
+      </div>
+      <div class="compare-grid">
+        <div class="compare-box old">
+          <h4>❌ 决策者要政绩</h4>
+          <ul>
+            <li>采购看参数、看品牌</li>
+            <li>追求"有了AI"的名头</li>
+            <li>验收即结束，不关心使用</li>
+          </ul>
+        </div>
+        <div class="compare-box old">
+          <h4>❌ 使用者要减负</h4>
+          <ul>
+            <li>新系统增加学习成本</li>
+            <li>功能复杂，入口难找</li>
+            <li>没有解决实际痛点</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 1.2rem; margin-top: 24px;">
+        <span class="highlight-orange">传统产品顾此失彼，导致"交付即吃灰"</span>
+      </p>
+    </div>
+
+    <!-- 第8页：破局思考 -->
+    <div class="slide">
+      <h2>破局思考：面子与里子的平衡</h2>
+      <p style="text-align: center; font-size: 1rem; margin-bottom: 20px;">
+        不是二选一，而是<span class="highlight">找到交集</span>——让产品既能"展示成果"又能"真正好用"
+      </p>
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>🎯 给购买决策者"面子"</h4>
+          <p><strong>关键因素：</strong></p>
+          <ul>
+            <li>AI融合的政绩口碑</li>
+            <li>资金标的合理化</li>
+            <li>人才培养成效展示</li>
+            <li>教师效能提升数据</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>💪 给实际使用者"里子"</h4>
+          <p><strong>核心痛点：</strong></p>
+          <ul>
+            <li>工作效率真实提升</li>
+            <li>学生提分效果可见</li>
+            <li>操作简单易上手</li>
+            <li>融入日常教学流程</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第9页：三位一体解决方案 -->
+    <div class="slide">
+      <h2>三位一体解决方案</h2>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="icon">📚</div>
+          <div class="title">内容为基</div>
+          <div class="desc">解决"用什么，有资源"</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🛠️</div>
+          <div class="title">工具为器</div>
+          <div class="desc">解决"怎么用，方便用"</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🎯</div>
+          <div class="title">策略为魂</div>
+          <div class="desc">解决"有效果，愿意用"</div>
+        </div>
+      </div>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>内容层</h4>
+          <p>高质量的教学资源库、题库、知识图谱，让老师"打开即用"</p>
+        </div>
+        <div class="card orange">
+          <h4>工具层</h4>
+          <p>AI批改、智能推题、数据分析等工具，降低使用门槛</p>
+        </div>
+        <div class="card green">
+          <h4>策略层</h4>
+          <p>培训指导、场景化方案、效果追踪，确保持续使用</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第10页：三校试点验证 -->
+    <div class="slide">
+      <h2>三校试点：验证价值回归路径</h2>
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>🏫 仁北中学 · 分层教学练</h4>
+          <p><strong>旧：</strong>教学练难分层 → <strong>新：</strong>选填限时练+强化小组，数据驱动</p>
+        </div>
+        <div class="card orange">
+          <h4>🏫 镇江学校 · 常态化使用</h4>
+          <p><strong>旧：</strong>手批讲解低效 → <strong>新：</strong>AI批改+答疑+靶向练，精准狙击</p>
+        </div>
+        <div class="card green">
+          <h4>🏫 二十中 · 数学公开课</h4>
+          <p><strong>旧：</strong>PPT讲授型课堂 → <strong>新：</strong>小程序互动+实时检测，主动探索</p>
+        </div>
+        <div class="card">
+          <h4>🏫 仁北中学 · 英语示范课</h4>
+          <p><strong>旧：</strong>缺语境难输出 → <strong>新：</strong>AI数字人对话+作文批改，口语表达</p>
+        </div>
+      </div>
+      <div class="image-gallery">
+        <div class="image-item">
+          <img src="05照片物料/03镇江首次课堂0陈老师.jpg" alt="镇江课堂">
+          <div class="caption">镇江学校课堂实景</div>
+        </div>
+        <div class="image-item">
+          <img src="05照片物料/04仁北孙老师强化小组课.jpg" alt="仁北小组课">
+          <div class="caption">仁北强化小组课</div>
+        </div>
+        <div class="image-item">
+          <img src="05照片物料/06北京二十中公开课小组讨论.jpg" alt="二十中公开课">
+          <div class="caption">北京二十中公开课</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第11页：AI给用户真实价值（章节封面） -->
+    <div class="slide section-cover">
+      <div class="section-number">第三部分</div>
+      <h2>AI给用户的真实价值</h2>
+      <p class="section-desc">AI不是为了"有AI"而做，而是为了让旧场景产生新价值。<br>每个AI功能都要回答：它解决了什么真实痛点？用户为什么愿意用？</p>
+    </div>
+
+    <!-- 第12页：AI能力与痛点对应 -->
+    <div class="slide">
+      <h2>AI能力与痛点对应</h2>
+      <p>AI能力不是"技术展示"，而是对应真实痛点</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>传统痛点</th>
+            <th>AI解决方案</th>
+            <th>价值体现</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>课堂填鸭式输入</td>
+            <td>AI对话 / AI动画</td>
+            <td>互动式学习，激发兴趣</td>
+          </tr>
+          <tr>
+            <td>批改答疑耗时</td>
+            <td>AI批改 / AI讲题</td>
+            <td>教师减负，即时反馈</td>
+          </tr>
+          <tr>
+            <td>练习效率低下</td>
+            <td>AI靶向 / AI举一反三</td>
+            <td>精准练习，效率提升</td>
+          </tr>
+          <tr>
+            <td>自学缺乏方向</td>
+            <td>AI规划 / AI任务</td>
+            <td>个性化路径，目标清晰</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 第13页：AI功能案例1-虚拟人物对话 -->
+    <div class="slide">
+      <h2>AI功能案例1：虚拟人物对话</h2>
+      <div class="compare-grid">
+        <div class="compare-box old">
+          <h4>旧场景</h4>
+          <ul>
+            <li><strong>语文：</strong>难以理解跨时代作者意图</li>
+            <li><strong>英语：</strong>语境欠缺，口语输出缺乏真实对话场景</li>
+          </ul>
+        </div>
+        <div class="compare-box new">
+          <h4>新体验</h4>
+          <ul>
+            <li>与"虚拟作者/人物"对话，追问写作背景、人物心理、时代语境</li>
+            <li>英语场景中与AI角色进行情境对话练习</li>
+          </ul>
+        </div>
+      </div>
+      <div class="single-image">
+        <img src="05照片物料/仁北英语示范课-AI数字人对话.png" alt="AI数字人对话">
+      </div>
+      <h3>解决思路</h3>
+      <ul>
+        <li>老师预配置教学意图与核心知识点作为AI对话的"锚点"</li>
+        <li>通过prompt约束AI角色边界（如鲁迅只谈其作品与时代）</li>
+        <li>对话结束后自动生成知识点小结供老师复用</li>
+      </ul>
+    </div>
+
+    <!-- 第14页：AI功能案例2-学习路径规划 -->
+    <div class="slide">
+      <h2>AI功能案例2：学习路径规划</h2>
+      <div class="compare-grid">
+        <div class="compare-box old">
+          <h4>旧场景</h4>
+          <ul>
+            <li>学生自学缺乏方向——不知道先学什么、怎么学、学到什么程度</li>
+            <li>作业/错题/学练各模块割裂，缺乏整体牵引</li>
+          </ul>
+        </div>
+        <div class="compare-box new">
+          <h4>新体验</h4>
+          <ul>
+            <li>自主设定目标 → AI生成个性化学习规划</li>
+            <li>拆解为可执行的每日任务 → 学情更新动态调整路径</li>
+          </ul>
+        </div>
+      </div>
+      <div class="single-image">
+        <img src="05照片物料/03镇江AI规划学生查看报告.jpg" alt="AI学习规划">
+      </div>
+      <h3>价值验证</h3>
+      <p>镇江试点落地可用性验证合格，学生AI任务<span class="highlight">平均完成率40%</span>（目标提升至50%），自学板块活跃率稳步提升</p>
+    </div>
+
+    <!-- 第15页：进校场景AI能力设计理念 -->
+    <div class="slide">
+      <h2>进校场景AI能力设计理念</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h4>🎯 价值锚定</h4>
+          <p>先问"解决什么问题"，再问"AI能带来什么变化"</p>
+        </div>
+        <div class="card orange">
+          <h4>🔭 终点回顾</h4>
+          <p>站在AI能力演进的终点思考架构</p>
+        </div>
+        <div class="card green">
+          <h4>📈 渐进引入</h4>
+          <p>辅助推荐 → 监管干预权利 → 自动执行，让用户逐步建立信任</p>
+        </div>
+        <div class="card">
+          <h4>🤝 人机协同</h4>
+          <p>AI提供能力，人做最终决策，保持用户的参与感</p>
+        </div>
+      </div>
+      <div class="quote">
+        核心理念：AI不是替代老师，而是赋能老师；不是代替学习，而是引导学习。
+      </div>
+    </div>
+
+    <!-- 第16页：AI案例反思与启示 -->
+    <div class="slide">
+      <h2>AI案例反思与启示</h2>
+      <h3>挑战与反思</h3>
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>虚拟人物对话</h4>
+          <ul>
+            <li>AI回答的灵活度与教学意图的精准实现需持续打磨</li>
+            <li>功能入口较深导致发现率偏低，需优化引导路径</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>学习路径规划</h4>
+          <ul>
+            <li>AI规划的"权威感"需通过效果验证逐步建立</li>
+            <li>规划更新机制可引入学生主动反馈，让AI更懂个体节奏</li>
+          </ul>
+        </div>
+      </div>
+      <h3>共同启示</h3>
+      <ul>
+        <li><span class="highlight">场景深耕：</span>AI功能必须深入理解教学场景，而非简单技术移植</li>
+        <li><span class="highlight">用户信任：</span>信任需要通过效果验证逐步建立，急不得</li>
+        <li><span class="highlight">持续迭代：</span>基于真实反馈不断优化，而非一次性交付</li>
+      </ul>
+    </div>
+
+    <!-- 第17页：AI应用未来迭代展望 -->
+    <div class="slide">
+      <h2>AI应用未来迭代展望</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">短期</div>
+          <div class="content">
+            <strong>打磨现有能力</strong><br>
+            持续打磨现有AI能力，提升准确率和响应速度
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">中期</div>
+          <div class="content">
+            <strong>构建AI Agent形态</strong><br>
+            从"触发功能"到"任务代理"<br>
+            <div class="tags" style="margin-top: 12px;">
+              <span class="tag">教师AI助手：自动备课、发作业、分析学情</span>
+              <span class="tag orange">学生AI助教：更新学情诊断、刻画学习风格、攻克薄弱点</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">长期</div>
+          <div class="content">
+            <strong>探索AI-Native教育产品</strong><br>
+            不仅"在旧场景加AI"，而是"围绕AI重构校园场景"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第18页：保障价值落地章节封面 -->
+    <div class="slide section-cover">
+      <div class="section-number">第四部分</div>
+      <h2>保障价值落地的工作流与机制</h2>
+      <p class="section-desc">好的产品设计只是开始，价值回归需要全链路保障——从需求洞察到交付运营，每个环节都要"接地气"。</p>
+    </div>
+
+    <!-- 第19页：AI驱动产品经理工作流 -->
+    <div class="slide">
+      <h2>AI驱动产品经理工作流</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>L1 提效助手</h4>
+          <p>AI辅助原型图/文档的生成和纠错，降低上下游沟通成本</p>
+          <div class="tags">
+            <span class="tag">阿拉丁生成交互demo</span>
+          </div>
+        </div>
+        <div class="card orange">
+          <h4>L2 大脑外挂</h4>
+          <p>利用AI质疑/鞭策数据分析与用户洞察，让决策思考更深入、更全面</p>
+          <div class="tags">
+            <span class="tag orange">需求分析专家skill</span>
+          </div>
+        </div>
+        <div class="card green">
+          <h4>L3 试错团队</h4>
+          <p>通过vibe coding快速落地想法，实现0元试错和无限迭代</p>
+          <div class="tags">
+            <span class="tag">CC部署MVP产品</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第20页：重构产研工作流程 -->
+    <div class="slide">
+      <h2>重构产研工作流程（SDD模式）</h2>
+      <div class="quote">
+        <strong>Spec-Driven Development：</strong>以AI生成的交互规格说明为起点，以结果交付为唯一目标，各角色基于规范，使用自然语言描述需求、纠正架构、验收结果，缩短研发上线链路
+      </div>
+      <h3>挑战难点</h3>
+      <ul>
+        <li>规范的定义重要但艰难</li>
+        <li>团队协作习惯转变需要时间</li>
+        <li>对产品经理的AI理解要求提高</li>
+      </ul>
+      <h3>愿景设想</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="title">产品经理</div>
+          <div class="desc">从"写文档"进化为"编排AI"</div>
+        </div>
+        <div class="flow-step">
+          <div class="title">研发</div>
+          <div class="desc">从"翻译需求"进化为"优化架构"</div>
+        </div>
+        <div class="flow-step">
+          <div class="title">周期</div>
+          <div class="desc">从月级压缩到周级</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第21页：建立完善交付反馈机制 -->
+    <div class="slide">
+      <h2>建立完善交付反馈机制</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>📚 交付培训</h4>
+          <p>亲自完成<span class="highlight">10+场培训</span>、<span class="highlight">100+教师</span>覆盖，沉淀总结典型案例和QA，建立售后知识库，交付运营自运转</p>
+        </div>
+        <div class="card orange">
+          <h4>🔄 反馈闭环</h4>
+          <p>问题反馈模版@机器人记录 → 测试owner定位 → 知途工单分配研发产品解决跟进 → 运营周报统计解决情况</p>
+        </div>
+        <div class="card green">
+          <h4>📊 调研追踪</h4>
+          <p>全员去一线田野调研、搭建分析看板追踪师生行为和效果数据、学期维度成绩分析和问卷反馈</p>
+        </div>
+      </div>
+      <div class="image-gallery">
+        <div class="image-item">
+          <img src="05照片物料/01教师培训-河北10个班.jpg" alt="教师培训">
+          <div class="caption">河北教师培训现场</div>
+        </div>
+        <div class="image-item">
+          <img src="05照片物料/05仁北教师群聊反馈.jpg" alt="群聊反馈">
+          <div class="caption">仁北教师群反馈</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第22页：交付机制价值总结 -->
+    <div class="slide">
+      <h2>交付机制的价值</h2>
+      <div class="quote">
+        机制是"保障价值落地"的手段，不是为流程而流程
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">10+</div>
+          <div class="label">培训场次</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">100+</div>
+          <div class="label">覆盖教师</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">7天</div>
+          <div class="label">问题响应周期</div>
+        </div>
+      </div>
+      <h3>关键成效</h3>
+      <ul>
+        <li><span class="highlight">售后知识库：</span>典型问题沉淀，新人可快速上手</li>
+        <li><span class="highlight">反馈闭环：</span>问题有跟踪、有解决、有复盘</li>
+        <li><span class="highlight">数据驱动：</span>基于行为数据和成绩数据持续优化产品</li>
+      </ul>
+    </div>
+
+    <!-- 第23页：人员培养章节封面 -->
+    <div class="slide section-cover">
+      <div class="section-number">第五部分</div>
+      <h2>人员培养与输出</h2>
+      <p class="section-desc">培养"懂场景、重价值"的产品人<br><br>个人能力有天花板，团队能力才能持续放大价值。培养人的核心是传递"价值回归"的产品理念。</p>
+    </div>
+
+    <!-- 第24页：团队现状 -->
+    <div class="slide">
+      <h2>团队现状</h2>
+      <div class="quote">
+        4人小组，明确分工但共享"价值回归"理念；不是各干各的，而是围绕用户价值协同
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">4</div>
+          <div class="label">团队成员</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">1</div>
+          <div class="label">共同理念</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">∞</div>
+          <div class="label">协同可能</div>
+        </div>
+      </div>
+      <h3>团队特点</h3>
+      <ul>
+        <li><span class="highlight">理念统一：</span>每个人都能讲清楚"为什么要做价值回归"</li>
+        <li><span class="highlight">分工明确：</span>各有专攻领域，但相互支持</li>
+        <li><span class="highlight">目标导向：</span>以用户价值为北极星指标</li>
+      </ul>
+    </div>
+
+    <!-- 第25页：校招生培养案例 -->
+    <div class="slide">
+      <h2>校招生培养案例</h2>
+      <h3>培养理念</h3>
+      <div class="quote">
+        不是教"怎么写PRD"，而是教"怎么理解用户场景"
+      </div>
+      <h3>培养路径</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="title">0-6月</div>
+          <div class="desc">跟着跑</div>
+        </div>
+        <div class="flow-step">
+          <div class="title">6-12月</div>
+          <div class="desc">独立想</div>
+        </div>
+        <div class="flow-step">
+          <div class="title">1年后</div>
+          <div class="desc">独立扛</div>
+        </div>
+      </div>
+      <h3>关键动作</h3>
+      <ul>
+        <li>带她入校调研，直面真实用户</li>
+        <li>让她亲自跟进需求全流程</li>
+        <li>复盘每个需求的"为什么"</li>
+      </ul>
+    </div>
+
+    <!-- 第26页：培养成果展示 -->
+    <div class="slide">
+      <h2>培养成果展示</h2>
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>📝 独立产出</h4>
+          <p>6个月内完成<span class="highlight">10+需求设计</span>，独立负责英语学科和学生自学板块</p>
+        </div>
+        <div class="card orange">
+          <h4>📈 能力成长</h4>
+          <p>从"接需求做功能"到"主动挖掘用户痛点并提出解决方案"</p>
+        </div>
+      </div>
+      <h3>培养四步法</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="icon">👀</div>
+          <div class="title">体验</div>
+          <div class="desc">感受产品与用户</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">💪</div>
+          <div class="title">实战</div>
+          <div class="desc">参与真实项目</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🎯</div>
+          <div class="title">主导</div>
+          <div class="desc">独立负责模块</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🚀</div>
+          <div class="title">目标</div>
+          <div class="desc">承担业务指标</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第27页：知识沉淀与组织影响力 -->
+    <div class="slide">
+      <h2>知识沉淀与组织影响力</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>🎤 事业部分享</h4>
+          <p>《AI重塑进校智教产品用户价值》——传递"价值回归"理念</p>
+        </div>
+        <div class="card orange">
+          <h4>📄 PRD产出</h4>
+          <p><span class="highlight">19+核心PRD</span>，<span class="highlight">15+版本迭代</span>，大小屏产品高中全科全场景覆盖完成</p>
+        </div>
+        <div class="card green">
+          <h4>👥 团队管理</h4>
+          <p>学习产品小组（4人），各自有指标、有规划、有创新，保障业务价值实现</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">19+</div>
+          <div class="label">核心PRD</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">15+</div>
+          <div class="label">版本迭代</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">4</div>
+          <div class="label">团队成员</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第28页：成长与反思章节封面 -->
+    <div class="slide section-cover">
+      <div class="section-number">第六部分</div>
+      <h2>成长与反思</h2>
+      <p class="section-desc">围绕"价值回归"的持续精进</p>
+    </div>
+
+    <!-- 第29页：能力复盘 -->
+    <div class="slide">
+      <h2>能力复盘</h2>
+      <div class="compare-grid">
+        <div class="compare-box new">
+          <h4>✅ 得</h4>
+          <ul>
+            <li><strong>ToG场景洞察：</strong>理解"面子与里子"的平衡，能在复杂利益中找到价值交集</li>
+            <li><strong>AI产品化能力：</strong>从技术可行到用户可用，积累了完整的落地经验</li>
+            <li><strong>全链路操盘：</strong>需求到交付的闭环能力，确保价值不在任何环节流失</li>
+          </ul>
+        </div>
+        <div class="compare-box old">
+          <h4>⚠️ 失</h4>
+          <ul>
+            <li><strong>战略耐心：</strong>有时急于证明价值，需要更长期的视角</li>
+            <li><strong>向上影响：</strong>跨部门资源协调能力仍有提升空间</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第30页：3.1阶段规划 -->
+    <div class="slide">
+      <h2>3.1阶段规划</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>🏢 业务层面</h4>
+          <p>深化"价值回归"路径，从<span class="highlight">单校验证</span>到<span class="highlight">多校复制</span></p>
+        </div>
+        <div class="card orange">
+          <h4>👥 团队层面</h4>
+          <p>让团队每个人都能讲清楚"我们为什么这么做"</p>
+        </div>
+        <div class="card green">
+          <h4>🧑 个人层面</h4>
+          <p>从"业务产品经理"向"业务规划者"进阶，更系统地思考产品方向</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第31页：展望未来 -->
+    <div class="slide">
+      <h2>展望未来</h2>
+      <div class="quote" style="font-size: 1rem; text-align: center;">
+        坚持"价值回归"理念，让进校产品真正服务于教学本质
+      </div>
+      <div class="card-grid three-col" style="margin-top: 24px;">
+        <div class="card">
+          <h4>🎯 持续深耕</h4>
+          <p>深入理解教学场景，让每个功能都解决真实问题</p>
+        </div>
+        <div class="card orange">
+          <h4>🚀 规模复制</h4>
+          <p>将验证成功的模式复制到更多学校</p>
+        </div>
+        <div class="card green">
+          <h4>🌟 引领行业</h4>
+          <p>树立进校产品"价值回归"的标杆</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第32页：感谢页 -->
+    <div class="slide thanks">
+      <h2>感谢聆听</h2>
+      <p>期待与各位专家交流探讨</p>
+    </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()">上一页</button>
+    <span class="page-info" id="pageInfo">1 / 32</span>
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()">下一页</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalPages = slides.length;
+    const pageInfo = document.getElementById('pageInfo');
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showSlide(index) {
+      if (index < 0 || index >= totalPages) return;
+
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+
+      currentIndex = index;
+      pageInfo.textContent = `${index + 1} / ${totalPages}`;
+      progressBar.style.width = `${((index + 1) / totalPages) * 100}%`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalPages - 1;
+    }
+
+    function nextSlide() {
+      if (currentIndex < totalPages - 1) {
+        showSlide(currentIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        showSlide(currentIndex - 1);
+      }
+    }
+
+    // 键盘控制
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        showSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        showSlide(totalPages - 1);
+      }
+    });
+
+    // 触摸滑动支持
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // 初始化
+    showSlide(0);
+  </script>
+</body>
+</html>
