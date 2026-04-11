@@ -660,6 +660,162 @@
       color: #6B7280;
     }
 
+    /* 业务全景图左右布局 */
+    .business-overview-layout {
+      display: flex;
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    .business-left {
+      flex: 2;
+    }
+
+    .business-right {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .business-left h3,
+    .business-right h3 {
+      margin-top: 0;
+    }
+
+    .business-left p {
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    /* 产品矩阵图片 */
+    .product-matrix-img {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-matrix-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 垂直时间线（右侧） */
+    .timeline-vertical {
+      position: relative;
+      padding-left: 20px;
+      margin-top: 12px;
+    }
+
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: linear-gradient(to bottom, #6366F1, #8B5CF6);
+      border-radius: 2px;
+    }
+
+    .timeline-v-item {
+      position: relative;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .timeline-v-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-v-dot {
+      position: absolute;
+      left: -20px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      background: #6366F1;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+    }
+
+    .timeline-v-content {
+      padding-left: 4px;
+    }
+
+    .timeline-v-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #6366F1;
+      margin-bottom: 2px;
+    }
+
+    .timeline-v-text {
+      font-size: 0.8rem;
+      color: #4B5563;
+      line-height: 1.4;
+    }
+
+    /* 迷你流程图 */
+    .mini-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .mini-flow-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #EEF2FF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 0.75rem;
+    }
+
+    .mini-flow-icon {
+      font-size: 1rem;
+    }
+
+    .mini-flow-text {
+      color: #1F2937;
+    }
+
+    .mini-flow-arrow {
+      color: #6366F1;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    /* 人物小传卡片 */
+    .bio-card {
+      background: #FAFAFA;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .bio-card p {
+      margin: 4px 0 10px 0;
+      color: #4B5563;
+    }
+
+    .bio-tag {
+      display: inline-block;
+      background: #6366F1;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
     /* 目录样式 */
     .toc-list {
       display: grid;
@@ -902,9 +1058,9 @@
   <div class="presentation">
     <!-- 第1页：封面 -->
     <div class="slide cover active">
-      <h1>进校产品价值回归<br>AI赋能旧场景下的新体验</h1>
-      <p class="subtitle">2.3 → 3.1 产品专家晋升述职</p>
-      <p class="author"><span>于涓</span></p>
+      <h1>进校产品价值回归</h1>
+      <p class="subtitle">AI赋能旧场景下的新体验</p>
+      <p class="author"><span>AI智慧教育 · 于涓</span></p>
     </div>
 
     <!-- 第2页：目录 -->
@@ -941,25 +1097,14 @@
       </div>
     </div>
 
-    <!-- 第3页：职业发展时间线 -->
-    <div class="slide">
-      <h2>第一部分：个人经历</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="date">2024年9月 - 11月</div>
-          <div class="content">
-            <strong>口算宝APP</strong><br>
-            负责口算宝产品相关工作
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="date">2024年11月 - 至今</div>
-          <div class="content">
-            <strong>ToG进校产品 - 九章爱学</strong><br>
-            主要负责大小屏产品，推动进校产品价值回归
-          </div>
-        </div>
-      </div>
+    <!-- 第3页：个人经历章节封面 -->
+    <div class="slide section-cover">
+      <div class="section-number">第一部分</div>
+      <h2>个人经历</h2>
+      <p class="section-desc">
+        <strong>2024年9月 - 11月</strong>　口算宝APP，负责口算宝产品相关工作<br><br>
+        <strong>2024年11月 - 至今</strong>　ToG进校产品 - 九章爱学，主要负责大小屏产品，推动进校产品价值回归
+      </p>
     </div>
 
     <!-- 第4页：第二部分章节封面 -->
@@ -969,28 +1114,155 @@
       <p class="section-desc">从0到1验证价值回归路径<br><br>进校产品行业普遍"交付即吃灰"，根因是价值偏离——重设备轻体验、重政绩轻教学。我的破局思路是回归真实场景需求，用"内容+工具+策略"三位一体让产品真正被用起来。</p>
     </div>
 
-    <!-- 第5页：业务全景图 -->
+    <!-- 第5页：行业困境与破局思考 -->
+    <div class="slide">
+      <h2>行业困境与破局思考</h2>
+      <div class="compare-grid">
+        <div class="compare-box old">
+          <h4>❌ 领导要政绩</h4>
+          <ul>
+            <li>采购看参数、看品牌</li>
+            <li>重视AI覆盖度</li>
+            <li>看结果不看过程</li>
+          </ul>
+        </div>
+        <div class="compare-box old">
+          <h4>❌ 师生要减负</h4>
+          <ul>
+            <li>功能繁多，但只用一两个</li>
+            <li>行政任务要求，表演痕迹重</li>
+            <li>自控力不足，监管难度大</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 0.95rem; margin: 12px 0; color: #DC2626;">
+        进校硬件普遍沦为交付即吃灰，使用率活跃率低
+      </p>
+      <p style="text-align: center; font-size: 1rem; margin: 12px 0 12px;">
+        <span class="highlight-orange">破局思路：让产品既能"展示成果"又能"真正好用"</span>
+      </p>
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>🎯 给购买决策者"面子"</h4>
+          <ul>
+            <li>打造AI融合新质课堂</li>
+            <li>教师效能与AI素养提升</li>
+            <li>AI赋能因材施教落地</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>💪 给实际使用者"里子"</h4>
+          <ul>
+            <li>教师有效率提升</li>
+            <li>学生有效果提分</li>
+            <li>产品有真实场景</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第6页：三位一体解决方案与AI能力落地 -->
+    <div class="slide">
+      <h2>三位一体解决方案与AI能力落地</h2>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="icon">📚</div>
+          <div class="title">内容为基</div>
+          <div class="desc">解决"用什么，有资源"</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🛠️</div>
+          <div class="title">工具为器</div>
+          <div class="desc">解决"怎么用，方便用"</div>
+        </div>
+        <div class="flow-step">
+          <div class="icon">🎯</div>
+          <div class="title">策略为魂</div>
+          <div class="desc">解决"有效果，愿意用"</div>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 0.9rem; color: #6366F1; margin: 12px 0 8px;"><strong>AI能力融入原有教学练场景，切中痛点实现价值回归</strong></p>
+      <table class="data-table" style="font-size: 0.8rem;">
+        <thead>
+          <tr>
+            <th>角色</th>
+            <th>传统痛点</th>
+            <th>AI解决方案</th>
+            <th>价值体现</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>教师</td>
+            <td>课堂填鸭式输入</td>
+            <td>AI对话 / 九章老师AI互动课件</td>
+            <td>互动式学习，激发兴趣</td>
+          </tr>
+          <tr>
+            <td>教师</td>
+            <td>批改答疑耗时</td>
+            <td>AI批改 / AI讲题</td>
+            <td>教师减负，即时反馈</td>
+          </tr>
+          <tr>
+            <td>学生</td>
+            <td>练习效率低下</td>
+            <td>AI靶向 / AI举一反三</td>
+            <td>精准练习，效率提升</td>
+          </tr>
+          <tr>
+            <td>学生</td>
+            <td>自学缺乏方向</td>
+            <td>AI规划 / AI任务</td>
+            <td>个性化路径，目标清晰</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 第7页：业务全景图 -->
     <div class="slide">
       <h2>业务全景图</h2>
-      <h3>产品矩阵</h3>
-      <p>覆盖<span class="highlight">课前/课中/课后</span>全场景，但重点不是"功能多"，而是<span class="highlight-orange">"每个功能解决一个真实痛点"</span></p>
-      <h3>关键里程碑</h3>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="date">2024.11</div>
-          <div class="content">项目立项启动</div>
+      <div class="business-overview-layout">
+        <div class="business-left">
+          <h3>产品矩阵</h3>
+          <p>覆盖<span class="highlight">课前/课中/课后</span>全场景，重点是<span class="highlight-orange">"每个功能解决一个真实痛点"</span></p>
+          <div class="product-matrix-img">
+            <img src="05照片物料/产品矩阵全景图.png" alt="九章爱学中小学智慧教育整体解决方案">
+          </div>
         </div>
-        <div class="timeline-item">
-          <div class="date">2025.3</div>
-          <div class="content">产品版本1.0上线，进入3个试点校</div>
-        </div>
-        <div class="timeline-item">
-          <div class="date">2025.9</div>
-          <div class="content">完成高中全科能力覆盖</div>
-        </div>
-        <div class="timeline-item">
-          <div class="date">2026.3</div>
-          <div class="content">使用案例沉淀，解耦交付运营</div>
+        <div class="business-right">
+          <h3>关键里程碑</h3>
+          <div class="timeline-vertical">
+            <div class="timeline-v-item">
+              <div class="timeline-v-dot"></div>
+              <div class="timeline-v-content">
+                <div class="timeline-v-date">2024.11</div>
+                <div class="timeline-v-text">项目立项启动</div>
+              </div>
+            </div>
+            <div class="timeline-v-item">
+              <div class="timeline-v-dot"></div>
+              <div class="timeline-v-content">
+                <div class="timeline-v-date">2025.3</div>
+                <div class="timeline-v-text">产品1.0上线，进入3个试点校</div>
+              </div>
+            </div>
+            <div class="timeline-v-item">
+              <div class="timeline-v-dot"></div>
+              <div class="timeline-v-content">
+                <div class="timeline-v-date">2025.9</div>
+                <div class="timeline-v-text">完成高中全科能力覆盖</div>
+              </div>
+            </div>
+            <div class="timeline-v-item">
+              <div class="timeline-v-dot"></div>
+              <div class="timeline-v-content">
+                <div class="timeline-v-date">2026.3</div>
+                <div class="timeline-v-text">使用案例沉淀，解耦交付运营</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -998,7 +1270,6 @@
     <!-- 第6页：核心战绩数据 -->
     <div class="slide">
       <h2>核心战绩数据</h2>
-      <p>用数据证明"价值回归"有效，设备不再吃灰</p>
       <div class="stats-grid">
         <div class="stat-card">
           <div class="number">10+</div>
@@ -1063,120 +1334,21 @@
       </div>
     </div>
 
-    <!-- 第7页：行业困境与价值偏离 -->
-    <div class="slide">
-      <h2>行业困境与价值偏离</h2>
-      <div class="quote">
-        设备使用率低的本质是"产品没有解决真实问题"
-      </div>
-      <div class="compare-grid">
-        <div class="compare-box old">
-          <h4>❌ 决策者要政绩</h4>
-          <ul>
-            <li>采购看参数、看品牌</li>
-            <li>追求"有了AI"的名头</li>
-            <li>验收即结束，不关心使用</li>
-          </ul>
-        </div>
-        <div class="compare-box old">
-          <h4>❌ 使用者要减负</h4>
-          <ul>
-            <li>新系统增加学习成本</li>
-            <li>功能复杂，入口难找</li>
-            <li>没有解决实际痛点</li>
-          </ul>
-        </div>
-      </div>
-      <p style="text-align: center; font-size: 1.2rem; margin-top: 24px;">
-        <span class="highlight-orange">传统产品顾此失彼，导致"交付即吃灰"</span>
-      </p>
-    </div>
-
-    <!-- 第8页：破局思考 -->
-    <div class="slide">
-      <h2>破局思考：面子与里子的平衡</h2>
-      <p style="text-align: center; font-size: 1rem; margin-bottom: 20px;">
-        不是二选一，而是<span class="highlight">找到交集</span>——让产品既能"展示成果"又能"真正好用"
-      </p>
-      <div class="card-grid two-col">
-        <div class="card">
-          <h4>🎯 给购买决策者"面子"</h4>
-          <p><strong>关键因素：</strong></p>
-          <ul>
-            <li>AI融合的政绩口碑</li>
-            <li>资金标的合理化</li>
-            <li>人才培养成效展示</li>
-            <li>教师效能提升数据</li>
-          </ul>
-        </div>
-        <div class="card orange">
-          <h4>💪 给实际使用者"里子"</h4>
-          <p><strong>核心痛点：</strong></p>
-          <ul>
-            <li>工作效率真实提升</li>
-            <li>学生提分效果可见</li>
-            <li>操作简单易上手</li>
-            <li>融入日常教学流程</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- 第9页：三位一体解决方案 -->
-    <div class="slide">
-      <h2>三位一体解决方案</h2>
-      <div class="flow-steps">
-        <div class="flow-step">
-          <div class="icon">📚</div>
-          <div class="title">内容为基</div>
-          <div class="desc">解决"用什么，有资源"</div>
-        </div>
-        <div class="flow-step">
-          <div class="icon">🛠️</div>
-          <div class="title">工具为器</div>
-          <div class="desc">解决"怎么用，方便用"</div>
-        </div>
-        <div class="flow-step">
-          <div class="icon">🎯</div>
-          <div class="title">策略为魂</div>
-          <div class="desc">解决"有效果，愿意用"</div>
-        </div>
-      </div>
-      <div class="card-grid three-col">
-        <div class="card">
-          <h4>内容层</h4>
-          <p>高质量的教学资源库、题库、知识图谱，让老师"打开即用"</p>
-        </div>
-        <div class="card orange">
-          <h4>工具层</h4>
-          <p>AI批改、智能推题、数据分析等工具，降低使用门槛</p>
-        </div>
-        <div class="card green">
-          <h4>策略层</h4>
-          <p>培训指导、场景化方案、效果追踪，确保持续使用</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 第10页：三校试点验证 -->
+    <!-- 第9页：三校试点验证 -->
     <div class="slide">
       <h2>三校试点：验证价值回归路径</h2>
-      <div class="card-grid two-col">
+      <div class="card-grid three-col">
         <div class="card">
-          <h4>🏫 仁北中学 · 分层教学练</h4>
-          <p><strong>旧：</strong>教学练难分层 → <strong>新：</strong>选填限时练+强化小组，数据驱动</p>
-        </div>
-        <div class="card orange">
           <h4>🏫 镇江学校 · 常态化使用</h4>
           <p><strong>旧：</strong>手批讲解低效 → <strong>新：</strong>AI批改+答疑+靶向练，精准狙击</p>
+        </div>
+        <div class="card orange">
+          <h4>🏫 仁北中学 · 分层教学练</h4>
+          <p><strong>旧：</strong>教学练难分层 → <strong>新：</strong>选填限时练+强化小组，数据驱动</p>
         </div>
         <div class="card green">
           <h4>🏫 二十中 · 数学公开课</h4>
           <p><strong>旧：</strong>PPT讲授型课堂 → <strong>新：</strong>小程序互动+实时检测，主动探索</p>
-        </div>
-        <div class="card">
-          <h4>🏫 仁北中学 · 英语示范课</h4>
-          <p><strong>旧：</strong>缺语境难输出 → <strong>新：</strong>AI数字人对话+作文批改，口语表达</p>
         </div>
       </div>
       <div class="image-gallery three-col">
@@ -1225,51 +1397,15 @@
       </div>
     </div>
 
-    <!-- 第11页：AI给用户真实价值（章节封面） -->
+    <!-- 第10页：AI实践与思考（章节封面） -->
     <div class="slide section-cover">
       <div class="section-number">第三部分</div>
-      <h2>AI给用户的真实价值</h2>
+      <h2>AI实践与思考</h2>
+      <p class="subtitle" style="font-size: 1.2rem; color: #6366F1; margin-bottom: 16px;">AI给用户的真实价值</p>
       <p class="section-desc">AI不是为了"有AI"而做，而是为了让旧场景产生新价值。<br>每个AI功能都要回答：它解决了什么真实痛点？用户为什么愿意用？</p>
     </div>
 
-    <!-- 第12页：AI能力与痛点对应 -->
-    <div class="slide">
-      <h2>AI能力与痛点对应</h2>
-      <p>AI能力不是"技术展示"，而是对应真实痛点</p>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>传统痛点</th>
-            <th>AI解决方案</th>
-            <th>价值体现</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>课堂填鸭式输入</td>
-            <td>AI对话 / AI动画</td>
-            <td>互动式学习，激发兴趣</td>
-          </tr>
-          <tr>
-            <td>批改答疑耗时</td>
-            <td>AI批改 / AI讲题</td>
-            <td>教师减负，即时反馈</td>
-          </tr>
-          <tr>
-            <td>练习效率低下</td>
-            <td>AI靶向 / AI举一反三</td>
-            <td>精准练习，效率提升</td>
-          </tr>
-          <tr>
-            <td>自学缺乏方向</td>
-            <td>AI规划 / AI任务</td>
-            <td>个性化路径，目标清晰</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 第13页：AI功能案例1-虚拟人物对话 -->
+    <!-- 第11页：AI功能案例1-虚拟人物对话 -->
     <div class="slide">
       <h2>AI功能案例1：虚拟人物对话</h2>
       <div class="compare-grid">
@@ -1293,43 +1429,69 @@
           <h4>🎯 挑战与解决思路</h4>
           <ul>
             <li><strong>挑战：</strong>需平衡"对话创意"与"教学准确"</li>
-            <li>老师预配置教学意图作为AI对话的"锚点"</li>
-            <li>通过prompt约束AI角色边界</li>
-            <li>对话结束后自动生成知识点小结</li>
+            <li>预设人物小传/课文考点作为知识库控制边界</li>
+            <li>老师可配置牵引问题实现教学意图</li>
           </ul>
         </div>
         <div class="card orange">
-          <h4>💡 反思与价值验证</h4>
+          <h4>💡 反思与迭代</h4>
           <ul>
             <li>AI灵活度与教学精准需持续打磨</li>
-            <li>功能入口较深，需优化引导路径</li>
-            <li><span class="highlight">学生兴趣显著提升，成功打造多节示范公开课</span></li>
+            <li>利用多AI人物丰富学生思辨力和语料库，仍值得深入探索</li>
           </ul>
         </div>
       </div>
       <div class="expand-buttons">
-        <button class="expand-btn" onclick="togglePanel(this, 'panel13-photo')">📷 查看落地效果</button>
         <button class="expand-btn" onclick="togglePanel(this, 'panel13-design')">📱 查看产品设计方案</button>
+        <button class="expand-btn" onclick="togglePanel(this, 'panel13-photo')">📷 查看落地效果</button>
       </div>
       <div class="expand-panels-row">
-        <div class="expand-panel" id="panel13-photo">
-          <div class="expand-content single">
+        <div class="expand-panel wide tall" id="panel13-design">
+          <div class="expand-content" style="grid-template-columns: 1fr 1.8fr; max-height: 380px; overflow-y: auto;">
             <div class="expand-section">
-              <h4>学校实地照片</h4>
-              <div class="expand-images">
-                <img src="05照片物料/04仁北孙老师强化小组课.jpg" alt="仁北课堂">
-                <img src="05照片物料/04仁北学生特写.jpg" alt="仁北学生">
+              <h4>功能流程</h4>
+              <div class="mini-flow">
+                <div class="mini-flow-item">
+                  <span class="mini-flow-icon">👨‍🏫</span>
+                  <span class="mini-flow-text">教师配置对话人物及话题</span>
+                </div>
+                <div class="mini-flow-arrow">↓</div>
+                <div class="mini-flow-item">
+                  <span class="mini-flow-icon">📱</span>
+                  <span class="mini-flow-text">课堂发起AI对话</span>
+                </div>
+                <div class="mini-flow-arrow">↓</div>
+                <div class="mini-flow-item">
+                  <span class="mini-flow-icon">🖥️</span>
+                  <span class="mini-flow-text">大屏展示对话过程</span>
+                </div>
+                <div class="mini-flow-arrow">↓</div>
+                <div class="mini-flow-item">
+                  <span class="mini-flow-icon">🎤</span>
+                  <span class="mini-flow-text">学生语音提问互动</span>
+                </div>
+              </div>
+            </div>
+            <div class="expand-section">
+              <h4>人物小传示例：白居易</h4>
+              <div class="bio-card">
+                <div class="bio-tag">核心身份</div>
+                <p>唐代现实主义诗人，新乐府运动倡导者，主张"文章合为时而著，歌诗合为事而作"</p>
+                <div class="bio-tag">创作背景</div>
+                <p>816年被贬江州司马期间，浔阳江头偶遇琵琶女，感慨"同是天涯沦落人"</p>
+                <div class="bio-tag">经典语句解读（作者口吻）</div>
+                <p style="font-style: italic; color: #4338CA;">"同是天涯沦落人，相逢何必曾相识"——她从京城倡女沦落为商人妇，我从朝廷官员被贬为江州司马，虽身份不同，却有着相似的坎坷遭遇。</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="expand-panel" id="panel13-design">
+        <div class="expand-panel narrow tall" id="panel13-photo">
           <div class="expand-content single">
             <div class="expand-section">
-              <h4>产品功能效果图</h4>
-              <div class="expand-images">
-                <img src="05照片物料/仁北英语示范课-AI数字人对话.png" alt="AI数字人对话">
-                <img src="05照片物料/仁北英语示范课-AI作文批改.png" alt="AI作文批改">
+              <h4>落地效果</h4>
+              <div class="expand-images" style="flex-direction: column; align-items: center;">
+                <img src="05照片物料/仁北英语示范课-AI数字人对话.png" alt="AI数字人对话" style="max-width: 100%; height: auto;">
+                <img src="05照片物料/仁北英语示范课-AI作文批改.png" alt="AI作文批改" style="max-width: 100%; height: auto;">
               </div>
             </div>
           </div>
@@ -1367,7 +1529,7 @@
           </ul>
         </div>
         <div class="card orange">
-          <h4>💡 反思与价值验证</h4>
+          <h4>💡 反思与迭代</h4>
           <ul>
             <li>AI"权威感"需通过效果验证逐步建立</li>
             <li>规划更新可引入学生主动反馈</li>
@@ -1523,7 +1685,7 @@
       </div>
     </div>
 
-    <!-- 第20页：重构产研工作流程 -->
+    <!-- 第17页：重构产研工作流程 -->
     <div class="slide">
       <h2>重构产研工作流程（SDD模式）</h2>
       <div class="quote">
@@ -1552,7 +1714,7 @@
       </div>
     </div>
 
-    <!-- 第21页：建立完善交付反馈机制 -->
+    <!-- 第18页：建立完善交付反馈机制 -->
     <div class="slide">
       <h2>建立完善交付反馈机制</h2>
       <div class="card-grid three-col">
@@ -1609,43 +1771,14 @@
       </div>
     </div>
 
-    <!-- 第22页：人员培养章节封面 -->
+    <!-- 第19页：团队输出与人员培养章节封面 -->
     <div class="slide section-cover">
       <div class="section-number">第五部分</div>
-      <h2>人员培养与输出</h2>
+      <h2>团队输出与人员培养</h2>
       <p class="section-desc">培养"懂场景、重价值"的产品人<br><br>个人能力有天花板，团队能力才能持续放大价值。培养人的核心是传递"价值回归"的产品理念。</p>
     </div>
 
-    <!-- 第22页：团队与组织影响力 -->
-    <div class="slide">
-      <h2>团队与组织影响力</h2>
-      <div class="card-grid three-col">
-        <div class="card">
-          <h4>👥 团队协作</h4>
-          <ul>
-            <li><strong>4人小组明确分工：</strong>课堂互动、课后作业、学生自学、整体规划各有owner</li>
-            <li><strong>指标驱动：</strong>课堂使用率、作业满意度、自学活跃率、续报效果层层拆解</li>
-            <li><strong>协同机制：</strong>共享"价值回归"理念，围绕用户价值高效协同</li>
-          </ul>
-        </div>
-        <div class="card orange">
-          <h4>🎤 知识分享</h4>
-          <ul>
-            <li><strong>事业部分享：</strong>《AI重塑进校智教产品用户价值》传递价值回归理念</li>
-          </ul>
-        </div>
-        <div class="card green">
-          <h4>📄 产出沉淀</h4>
-          <ul>
-            <li><strong>售后知识库：</strong>智慧作业、智慧课堂、师生工具全场景解决方案模板化</li>
-            <li><strong>培训体系：</strong>教师培训SOP、学生培训SOP，实现交付运营自运转</li>
-            <li><strong>产品文档：</strong>19+核心PRD、15+版本迭代，高中全科全场景覆盖</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- 第25页：校招生培养案例 -->
+    <!-- 第20页：校招生培养案例 -->
     <div class="slide">
       <h2>校招生培养案例</h2>
       <h3>培养理念</h3>
@@ -1713,7 +1846,36 @@
       </div>
     </div>
 
-    <!-- 第26页：成长与反思章节封面 -->
+    <!-- 第22页：团队与组织影响力 -->
+    <div class="slide">
+      <h2>团队与组织影响力</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>👥 团队协作</h4>
+          <ul>
+            <li><strong>4人小组明确分工：</strong>课堂互动、课后作业、学生自学、整体规划各有owner</li>
+            <li><strong>指标驱动：</strong>课堂使用率、作业满意度、自学活跃率、续报效果层层拆解</li>
+            <li><strong>协同机制：</strong>共享"价值回归"理念，围绕用户价值高效协同</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>🎤 知识分享</h4>
+          <ul>
+            <li><strong>事业部分享：</strong>《AI重塑进校智教产品用户价值》传递价值回归理念</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h4>📄 产出沉淀</h4>
+          <ul>
+            <li><strong>售后知识库：</strong>智慧作业、智慧课堂、师生工具全场景解决方案模板化</li>
+            <li><strong>培训体系：</strong>教师培训SOP、学生培训SOP，实现交付运营自运转</li>
+            <li><strong>产品文档：</strong>19+核心PRD、15+版本迭代，高中全科全场景覆盖</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第23页：成长与反思章节封面 -->
     <div class="slide section-cover">
       <div class="section-number">第六部分</div>
       <h2>成长与反思</h2>
@@ -1752,7 +1914,7 @@
         </div>
         <div class="card orange">
           <h4>👥 团队层面</h4>
-          <p>让团队每个人都能讲清楚"我们为什么这么做"</p>
+          <p>让团队每个人都能讲清楚"我们为什么这么做"；指标明确各司其职，全员项目制训练vibe coding能力</p>
         </div>
         <div class="card green">
           <h4>🧑 个人层面</h4>
