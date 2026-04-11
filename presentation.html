@@ -345,6 +345,10 @@
       margin: 12px 0;
     }
 
+    .image-gallery.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .image-item {
       border-radius: 8px;
       overflow: hidden;
@@ -366,6 +370,227 @@
       font-size: 0.75rem;
       color: #6B7280;
       text-align: center;
+    }
+
+    /* 图片轮播 */
+    .carousel-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: #F9FAFB;
+      position: relative;
+    }
+
+    .carousel-slides {
+      position: relative;
+      width: 100%;
+      height: 240px;
+    }
+
+    .carousel-slides img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      background: #F9FAFB;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel-slides img.active {
+      opacity: 1;
+    }
+
+    .carousel-item .caption {
+      padding: 6px 10px;
+      background: #F9FAFB;
+      font-size: 0.75rem;
+      color: #6B7280;
+      text-align: center;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 0;
+      background: #F9FAFB;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D1D5DB;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .carousel-dot.active {
+      background: #6366F1;
+    }
+
+    .carousel-dot:hover {
+      background: #8B5CF6;
+    }
+
+    /* 展开面板按钮 */
+    .expand-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .expand-btn {
+      background: #EEF2FF;
+      color: #6366F1;
+      border: 2px solid #6366F1;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .expand-btn:hover {
+      background: #6366F1;
+      color: white;
+    }
+
+    .expand-btn.active {
+      background: #6366F1;
+      color: white;
+    }
+
+    /* 展开面板内容 */
+    .expand-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease;
+      margin-top: 0;
+    }
+
+    .expand-panel.open {
+      max-height: 400px;
+      margin-top: 16px;
+    }
+
+    .expand-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 16px;
+      background: #F9FAFB;
+      border-radius: 10px;
+    }
+
+    .expand-section h4 {
+      font-size: 0.9rem;
+      color: #6366F1;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .expand-section img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .expand-content.single {
+      grid-template-columns: 1fr;
+    }
+
+    .expand-images {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .expand-images img {
+      flex: 1;
+      max-width: 45%;
+      height: 180px;
+    }
+
+    /* 双面板左右布局 */
+    .expand-panels-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .expand-panels-row .expand-panel {
+      flex: 1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      margin-top: 0;
+    }
+
+    .expand-panels-row .expand-panel.open {
+      max-height: 300px;
+    }
+
+    .expand-panels-row .expand-panel.open.tall {
+      max-height: 500px;
+    }
+
+    .expand-panels-row .expand-panel.wide {
+      flex: 2;
+    }
+
+    .expand-panels-row .expand-panel.narrow {
+      flex: 0.67;
+    }
+
+    .expand-panels-row .expand-panel.narrow .expand-images img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .expand-panels-row .expand-content {
+      padding: 12px;
+    }
+
+    .expand-panels-row .expand-images img {
+      max-width: 48%;
+      height: 160px;
+    }
+
+    /* iframe 嵌入样式 */
+    .demo-iframe-container {
+      width: 100%;
+      height: 440px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .demo-iframe {
+      width: 200%;
+      height: 880px;
+      border: none;
+      transform: scale(0.5);
+      transform-origin: top left;
+    }
+
+    .demo-iframe-container.wider {
+      height: 360px;
+    }
+
+    .demo-iframe-container.wider .demo-iframe,
+    .demo-iframe.wider {
+      width: 285%;
+      height: 1030px;
+      transform: scale(0.35);
     }
 
     .single-image {
@@ -573,8 +798,27 @@
     .page-info {
       font-size: 1rem;
       color: #6B7280;
-      min-width: 80px;
+      min-width: 100px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .page-input {
+      width: 36px;
+      padding: 4px 6px;
+      border: 1px solid #D1D5DB;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-align: center;
+      color: #1F2937;
+      outline: none;
+    }
+
+    .page-input:focus {
+      border-color: #6366F1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
     }
 
     .progress-bar {
@@ -638,12 +882,15 @@
         display: none;
       }
 
-      .image-gallery {
+      .image-gallery,
+      .image-gallery.three-col {
         grid-template-columns: 1fr;
       }
 
       .image-item img,
-      .single-image img {
+      .single-image img,
+      .carousel-slides,
+      .carousel-slides img {
         height: 180px;
       }
     }
@@ -774,17 +1021,43 @@
           <div class="label">续班率</div>
         </div>
       </div>
-      <div class="image-gallery">
-        <div class="image-item">
-          <img src="05照片物料/2025.04天津教育装备展0九章爱学展台.jpeg" alt="天津教育装备展">
-          <div class="caption">2025天津教育装备展-九章爱学展台</div>
+      <div class="image-gallery three-col">
+        <!-- 天津展会轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/2025.04天津教育装备展0九章爱学展台.jpeg" alt="天津教育装备展" class="active">
+            <img src="05照片物料/2025.04天津教育装备展0九章爱学展台于涓出镜.jpeg" alt="天津教育装备展于涓出镜">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
+          <div class="caption">2025天津教育装备展</div>
         </div>
-        <div class="image-item">
-          <img src="05照片物料/02镇江新闻报道.pic.jpg" alt="镇江新闻报道">
+        <!-- 镇江媒体报道轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/02镇江新闻报道.pic.jpg" alt="镇江新闻报道" class="active">
+            <img src="05照片物料/02镇江新闻报道-教师媒体采访.pic.jpg" alt="镇江教师媒体采访">
+            <img src="05照片物料/02镇江新闻报道于涓特写.pic.jpg" alt="镇江新闻报道于涓特写">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
           <div class="caption">镇江学校新闻报道</div>
         </div>
-        <div class="image-item">
-          <img src="05照片物料/0赤壁一中捐赠仪式学校大屏.jpeg" alt="捐赠仪式">
+        <!-- 赤壁捐赠轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/0赤壁一中捐赠仪式学校大屏.jpeg" alt="赤壁捐赠仪式大屏" class="active">
+            <img src="05照片物料/01赤壁一中捐赠仪式双方合照.JPG" alt="赤壁捐赠仪式合照">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
           <div class="caption">赤壁一中捐赠仪式</div>
         </div>
       </div>
@@ -906,17 +1179,47 @@
           <p><strong>旧：</strong>缺语境难输出 → <strong>新：</strong>AI数字人对话+作文批改，口语表达</p>
         </div>
       </div>
-      <div class="image-gallery">
-        <div class="image-item">
-          <img src="05照片物料/03镇江首次课堂0陈老师.jpg" alt="镇江课堂">
+      <div class="image-gallery three-col">
+        <!-- 镇江课堂轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/03镇江首次课堂0陈老师.jpg" alt="镇江课堂" class="active">
+            <img src="05照片物料/03镇江批改特写.jpg" alt="镇江批改特写">
+            <img src="05照片物料/04镇江讲题特写2.jpg" alt="镇江讲题特写">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
           <div class="caption">镇江学校课堂实景</div>
         </div>
-        <div class="image-item">
-          <img src="05照片物料/04仁北孙老师强化小组课.jpg" alt="仁北小组课">
+        <!-- 仁北小组课轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/04仁北孙老师强化小组课.jpg" alt="仁北小组课" class="active">
+            <img src="05照片物料/04仁北学生特写.jpg" alt="仁北学生特写">
+            <img src="05照片物料/05仁北复盘会.jpg" alt="仁北复盘会">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
           <div class="caption">仁北强化小组课</div>
         </div>
-        <div class="image-item">
-          <img src="05照片物料/06北京二十中公开课小组讨论.jpg" alt="二十中公开课">
+        <!-- 北京二十中轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/06北京二十中公开课小组讨论.jpg" alt="二十中公开课" class="active">
+            <img src="05照片物料/北京二十中公开课学生特写.jpg" alt="二十中学生特写">
+            <img src="05照片物料/北京二十中公开课学生全体做题.jpg" alt="二十中学生全体做题">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
           <div class="caption">北京二十中公开课</div>
         </div>
       </div>
@@ -985,15 +1288,53 @@
           </ul>
         </div>
       </div>
-      <div class="single-image">
-        <img src="05照片物料/仁北英语示范课-AI数字人对话.png" alt="AI数字人对话">
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>🎯 挑战与解决思路</h4>
+          <ul>
+            <li><strong>挑战：</strong>需平衡"对话创意"与"教学准确"</li>
+            <li>老师预配置教学意图作为AI对话的"锚点"</li>
+            <li>通过prompt约束AI角色边界</li>
+            <li>对话结束后自动生成知识点小结</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>💡 反思与价值验证</h4>
+          <ul>
+            <li>AI灵活度与教学精准需持续打磨</li>
+            <li>功能入口较深，需优化引导路径</li>
+            <li><span class="highlight">学生兴趣显著提升，成功打造多节示范公开课</span></li>
+          </ul>
+        </div>
       </div>
-      <h3>解决思路</h3>
-      <ul>
-        <li>老师预配置教学意图与核心知识点作为AI对话的"锚点"</li>
-        <li>通过prompt约束AI角色边界（如鲁迅只谈其作品与时代）</li>
-        <li>对话结束后自动生成知识点小结供老师复用</li>
-      </ul>
+      <div class="expand-buttons">
+        <button class="expand-btn" onclick="togglePanel(this, 'panel13-photo')">📷 查看落地效果</button>
+        <button class="expand-btn" onclick="togglePanel(this, 'panel13-design')">📱 查看产品设计方案</button>
+      </div>
+      <div class="expand-panels-row">
+        <div class="expand-panel" id="panel13-photo">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>学校实地照片</h4>
+              <div class="expand-images">
+                <img src="05照片物料/04仁北孙老师强化小组课.jpg" alt="仁北课堂">
+                <img src="05照片物料/04仁北学生特写.jpg" alt="仁北学生">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="expand-panel" id="panel13-design">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>产品功能效果图</h4>
+              <div class="expand-images">
+                <img src="05照片物料/仁北英语示范课-AI数字人对话.png" alt="AI数字人对话">
+                <img src="05照片物料/仁北英语示范课-AI作文批改.png" alt="AI作文批改">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 第14页：AI功能案例2-学习路径规划 -->
@@ -1003,7 +1344,7 @@
         <div class="compare-box old">
           <h4>旧场景</h4>
           <ul>
-            <li>学生自学缺乏方向——不知道先学什么、怎么学、学到什么程度</li>
+            <li>学生自学缺乏方向——不知道先学什么、怎么学</li>
             <li>作业/错题/学练各模块割裂，缺乏整体牵引</li>
           </ul>
         </div>
@@ -1011,15 +1352,55 @@
           <h4>新体验</h4>
           <ul>
             <li>自主设定目标 → AI生成个性化学习规划</li>
-            <li>拆解为可执行的每日任务 → 学情更新动态调整路径</li>
+            <li>拆解为每日任务 → 学情更新动态调整路径</li>
           </ul>
         </div>
       </div>
-      <div class="single-image">
-        <img src="05照片物料/03镇江AI规划学生查看报告.jpg" alt="AI学习规划">
+      <div class="card-grid two-col">
+        <div class="card">
+          <h4>🎯 挑战与解决思路</h4>
+          <ul>
+            <li><strong>挑战：</strong>AI规划如何获得学生信任？</li>
+            <li>让学生主动设定目标，提升参与感</li>
+            <li>拆分为碎片化AI任务（5-10分钟）</li>
+            <li>串联错题本、靶向练形成自学闭环</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>💡 反思与价值验证</h4>
+          <ul>
+            <li>AI"权威感"需通过效果验证逐步建立</li>
+            <li>规划更新可引入学生主动反馈</li>
+            <li><span class="highlight">镇江试点AI任务完成率40%，自学活跃率稳步提升</span></li>
+          </ul>
+        </div>
       </div>
-      <h3>价值验证</h3>
-      <p>镇江试点落地可用性验证合格，学生AI任务<span class="highlight">平均完成率40%</span>（目标提升至50%），自学板块活跃率稳步提升</p>
+      <div class="expand-buttons">
+        <button class="expand-btn" onclick="togglePanel(this, 'panel14-design')">📱 查看产品设计方案</button>
+        <button class="expand-btn" onclick="togglePanel(this, 'panel14-photo')">📷 查看落地效果</button>
+      </div>
+      <div class="expand-panels-row">
+        <div class="expand-panel wide tall" id="panel14-design">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>产品功能演示</h4>
+              <div class="demo-iframe-container">
+                <iframe class="demo-iframe" src="06产品功能demo/ai-learning-planner.html"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="expand-panel narrow tall" id="panel14-photo">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>学校实地照片</h4>
+              <div class="expand-images">
+                <img src="05照片物料/03镇江AI规划学生查看报告.jpg" alt="镇江AI规划">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 第15页：进校场景AI能力设计理念 -->
@@ -1048,33 +1429,6 @@
       </div>
     </div>
 
-    <!-- 第16页：AI案例反思与启示 -->
-    <div class="slide">
-      <h2>AI案例反思与启示</h2>
-      <h3>挑战与反思</h3>
-      <div class="card-grid two-col">
-        <div class="card">
-          <h4>虚拟人物对话</h4>
-          <ul>
-            <li>AI回答的灵活度与教学意图的精准实现需持续打磨</li>
-            <li>功能入口较深导致发现率偏低，需优化引导路径</li>
-          </ul>
-        </div>
-        <div class="card orange">
-          <h4>学习路径规划</h4>
-          <ul>
-            <li>AI规划的"权威感"需通过效果验证逐步建立</li>
-            <li>规划更新机制可引入学生主动反馈，让AI更懂个体节奏</li>
-          </ul>
-        </div>
-      </div>
-      <h3>共同启示</h3>
-      <ul>
-        <li><span class="highlight">场景深耕：</span>AI功能必须深入理解教学场景，而非简单技术移植</li>
-        <li><span class="highlight">用户信任：</span>信任需要通过效果验证逐步建立，急不得</li>
-        <li><span class="highlight">持续迭代：</span>基于真实反馈不断优化，而非一次性交付</li>
-      </ul>
-    </div>
 
     <!-- 第17页：AI应用未来迭代展望 -->
     <div class="slide">
@@ -1141,6 +1495,32 @@
           </div>
         </div>
       </div>
+      <div class="expand-buttons">
+        <button class="expand-btn" onclick="togglePanel(this, 'panel18-case1')">🎯 案例1：课堂小组讨论</button>
+        <button class="expand-btn" onclick="togglePanel(this, 'panel18-case2')">📊 案例2：模考诊断服务</button>
+      </div>
+      <div class="expand-panels-row">
+        <div class="expand-panel wide tall" id="panel18-case1">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>阿拉丁生成交互Demo - 课堂小组讨论</h4>
+              <div class="demo-iframe-container">
+                <iframe class="demo-iframe" src="https://alading.tal.com/preview?page_hash_id=r8EdlkZW&uuid=847484f4-22fb-48ff-8272-4019381b8d4a"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="expand-panel wide tall" id="panel18-case2">
+          <div class="expand-content single">
+            <div class="expand-section">
+              <h4>CC部署MVP产品 - 模考诊断服务</h4>
+              <div class="demo-iframe-container wider">
+                <iframe class="demo-iframe wider" src="https://corona1103.github.io/exam/"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 第20页：重构产研工作流程 -->
@@ -1189,79 +1569,80 @@
           <p>全员去一线田野调研、搭建分析看板追踪师生行为和效果数据、学期维度成绩分析和问卷反馈</p>
         </div>
       </div>
-      <div class="image-gallery">
-        <div class="image-item">
-          <img src="05照片物料/01教师培训-河北10个班.jpg" alt="教师培训">
-          <div class="caption">河北教师培训现场</div>
+      <div class="image-gallery three-col">
+        <!-- 教师培训轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/01教师培训-河北10个班.jpg" alt="河北教师培训" class="active">
+            <img src="05照片物料/01教师培训师-仁北.jpg" alt="仁北教师培训">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
+          <div class="caption">教师培训现场</div>
         </div>
-        <div class="image-item">
-          <img src="05照片物料/05仁北教师群聊反馈.jpg" alt="群聊反馈">
-          <div class="caption">仁北教师群反馈</div>
+        <!-- 学生培训轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/01杭州萧山学生培训1.jpeg" alt="杭州学生培训1" class="active">
+            <img src="05照片物料/杭州萧山学生培训2.jpeg" alt="杭州学生培训2">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
+          <div class="caption">学生培训现场</div>
+        </div>
+        <!-- 反馈沟通轮播 -->
+        <div class="carousel-item" data-carousel>
+          <div class="carousel-slides">
+            <img src="05照片物料/05仁北教师群聊反馈.jpg" alt="仁北教师群反馈" class="active">
+            <img src="05照片物料/06学校运营支持响应群.png" alt="学校运营支持响应群">
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
+          <div class="caption">反馈沟通渠道</div>
         </div>
       </div>
     </div>
 
-    <!-- 第22页：交付机制价值总结 -->
-    <div class="slide">
-      <h2>交付机制的价值</h2>
-      <div class="quote">
-        机制是"保障价值落地"的手段，不是为流程而流程
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="number">10+</div>
-          <div class="label">培训场次</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">100+</div>
-          <div class="label">覆盖教师</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">7天</div>
-          <div class="label">问题响应周期</div>
-        </div>
-      </div>
-      <h3>关键成效</h3>
-      <ul>
-        <li><span class="highlight">售后知识库：</span>典型问题沉淀，新人可快速上手</li>
-        <li><span class="highlight">反馈闭环：</span>问题有跟踪、有解决、有复盘</li>
-        <li><span class="highlight">数据驱动：</span>基于行为数据和成绩数据持续优化产品</li>
-      </ul>
-    </div>
-
-    <!-- 第23页：人员培养章节封面 -->
+    <!-- 第22页：人员培养章节封面 -->
     <div class="slide section-cover">
       <div class="section-number">第五部分</div>
       <h2>人员培养与输出</h2>
       <p class="section-desc">培养"懂场景、重价值"的产品人<br><br>个人能力有天花板，团队能力才能持续放大价值。培养人的核心是传递"价值回归"的产品理念。</p>
     </div>
 
-    <!-- 第24页：团队现状 -->
+    <!-- 第22页：团队与组织影响力 -->
     <div class="slide">
-      <h2>团队现状</h2>
-      <div class="quote">
-        4人小组，明确分工但共享"价值回归"理念；不是各干各的，而是围绕用户价值协同
+      <h2>团队与组织影响力</h2>
+      <div class="card-grid three-col">
+        <div class="card">
+          <h4>👥 团队协作</h4>
+          <ul>
+            <li><strong>4人小组明确分工：</strong>课堂互动、课后作业、学生自学、整体规划各有owner</li>
+            <li><strong>指标驱动：</strong>课堂使用率、作业满意度、自学活跃率、续报效果层层拆解</li>
+            <li><strong>协同机制：</strong>共享"价值回归"理念，围绕用户价值高效协同</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h4>🎤 知识分享</h4>
+          <ul>
+            <li><strong>事业部分享：</strong>《AI重塑进校智教产品用户价值》传递价值回归理念</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h4>📄 产出沉淀</h4>
+          <ul>
+            <li><strong>售后知识库：</strong>智慧作业、智慧课堂、师生工具全场景解决方案模板化</li>
+            <li><strong>培训体系：</strong>教师培训SOP、学生培训SOP，实现交付运营自运转</li>
+            <li><strong>产品文档：</strong>19+核心PRD、15+版本迭代，高中全科全场景覆盖</li>
+          </ul>
+        </div>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="number">4</div>
-          <div class="label">团队成员</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">1</div>
-          <div class="label">共同理念</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">∞</div>
-          <div class="label">协同可能</div>
-        </div>
-      </div>
-      <h3>团队特点</h3>
-      <ul>
-        <li><span class="highlight">理念统一：</span>每个人都能讲清楚"为什么要做价值回归"</li>
-        <li><span class="highlight">分工明确：</span>各有专攻领域，但相互支持</li>
-        <li><span class="highlight">目标导向：</span>以用户价值为北极星指标</li>
-      </ul>
     </div>
 
     <!-- 第25页：校招生培养案例 -->
@@ -1332,47 +1713,14 @@
       </div>
     </div>
 
-    <!-- 第27页：知识沉淀与组织影响力 -->
-    <div class="slide">
-      <h2>知识沉淀与组织影响力</h2>
-      <div class="card-grid three-col">
-        <div class="card">
-          <h4>🎤 事业部分享</h4>
-          <p>《AI重塑进校智教产品用户价值》——传递"价值回归"理念</p>
-        </div>
-        <div class="card orange">
-          <h4>📄 PRD产出</h4>
-          <p><span class="highlight">19+核心PRD</span>，<span class="highlight">15+版本迭代</span>，大小屏产品高中全科全场景覆盖完成</p>
-        </div>
-        <div class="card green">
-          <h4>👥 团队管理</h4>
-          <p>学习产品小组（4人），各自有指标、有规划、有创新，保障业务价值实现</p>
-        </div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="number">19+</div>
-          <div class="label">核心PRD</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">15+</div>
-          <div class="label">版本迭代</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">4</div>
-          <div class="label">团队成员</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 第28页：成长与反思章节封面 -->
+    <!-- 第26页：成长与反思章节封面 -->
     <div class="slide section-cover">
       <div class="section-number">第六部分</div>
       <h2>成长与反思</h2>
       <p class="section-desc">围绕"价值回归"的持续精进</p>
     </div>
 
-    <!-- 第29页：能力复盘 -->
+    <!-- 第27页：能力复盘 -->
     <div class="slide">
       <h2>能力复盘</h2>
       <div class="compare-grid">
@@ -1394,9 +1742,9 @@
       </div>
     </div>
 
-    <!-- 第30页：3.1阶段规划 -->
+    <!-- 第28页：规划与展望 -->
     <div class="slide">
-      <h2>3.1阶段规划</h2>
+      <h2>3.1阶段规划与展望</h2>
       <div class="card-grid three-col">
         <div class="card">
           <h4>🏢 业务层面</h4>
@@ -1411,27 +1759,8 @@
           <p>从"业务产品经理"向"业务规划者"进阶，更系统地思考产品方向</p>
         </div>
       </div>
-    </div>
-
-    <!-- 第31页：展望未来 -->
-    <div class="slide">
-      <h2>展望未来</h2>
-      <div class="quote" style="font-size: 1rem; text-align: center;">
+      <div class="quote" style="margin-top: 20px; font-size: 1rem; text-align: center;">
         坚持"价值回归"理念，让进校产品真正服务于教学本质
-      </div>
-      <div class="card-grid three-col" style="margin-top: 24px;">
-        <div class="card">
-          <h4>🎯 持续深耕</h4>
-          <p>深入理解教学场景，让每个功能都解决真实问题</p>
-        </div>
-        <div class="card orange">
-          <h4>🚀 规模复制</h4>
-          <p>将验证成功的模式复制到更多学校</p>
-        </div>
-        <div class="card green">
-          <h4>🌟 引领行业</h4>
-          <p>树立进校产品"价值回归"的标杆</p>
-        </div>
       </div>
     </div>
 
@@ -1445,7 +1774,7 @@
   <!-- 导航栏 -->
   <div class="navigation">
     <button class="nav-btn" id="prevBtn" onclick="prevSlide()">上一页</button>
-    <span class="page-info" id="pageInfo">1 / 32</span>
+    <span class="page-info"><input type="text" class="page-input" id="pageInput" value="1" onkeydown="handlePageInput(event)"> / <span id="totalPages">28</span></span>
     <button class="nav-btn" id="nextBtn" onclick="nextSlide()">下一页</button>
   </div>
 
@@ -1453,7 +1782,7 @@
     let currentIndex = 0;
     const slides = document.querySelectorAll('.slide');
     const totalPages = slides.length;
-    const pageInfo = document.getElementById('pageInfo');
+    const pageInput = document.getElementById('pageInput');
     const progressBar = document.getElementById('progressBar');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -1465,10 +1794,22 @@
       slides[index].classList.add('active');
 
       currentIndex = index;
-      pageInfo.textContent = `${index + 1} / ${totalPages}`;
+      pageInput.value = index + 1;
       progressBar.style.width = `${((index + 1) / totalPages) * 100}%`;
       prevBtn.disabled = index === 0;
       nextBtn.disabled = index === totalPages - 1;
+    }
+
+    function handlePageInput(event) {
+      if (event.key === 'Enter') {
+        const targetPage = parseInt(pageInput.value);
+        if (!isNaN(targetPage) && targetPage >= 1 && targetPage <= totalPages) {
+          showSlide(targetPage - 1);
+        } else {
+          pageInput.value = currentIndex + 1;
+        }
+        pageInput.blur();
+      }
     }
 
     function nextSlide() {
@@ -1527,6 +1868,69 @@
 
     // 初始化
     showSlide(0);
+
+    // 图片轮播功能
+    function initCarousels() {
+      const carousels = document.querySelectorAll('[data-carousel]');
+      carousels.forEach(carousel => {
+        const slides = carousel.querySelectorAll('.carousel-slides img');
+        const dots = carousel.querySelectorAll('.carousel-dot');
+        let currentSlide = 0;
+        let interval;
+
+        function showCarouselSlide(index) {
+          slides.forEach(s => s.classList.remove('active'));
+          dots.forEach(d => d.classList.remove('active'));
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+          currentSlide = index;
+        }
+
+        function nextCarouselSlide() {
+          const next = (currentSlide + 1) % slides.length;
+          showCarouselSlide(next);
+        }
+
+        // 点击圆点切换
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            showCarouselSlide(i);
+            resetInterval();
+          });
+        });
+
+        // 自动轮播
+        function startInterval() {
+          interval = setInterval(nextCarouselSlide, 2000);
+        }
+
+        function resetInterval() {
+          clearInterval(interval);
+          startInterval();
+        }
+
+        // 鼠标悬停暂停
+        carousel.addEventListener('mouseenter', () => clearInterval(interval));
+        carousel.addEventListener('mouseleave', startInterval);
+
+        startInterval();
+      });
+    }
+
+    initCarousels();
+
+    // 展开面板功能
+    function togglePanel(btn, panelId) {
+      const panel = document.getElementById(panelId);
+
+      if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        btn.classList.remove('active');
+      } else {
+        panel.classList.add('open');
+        btn.classList.add('active');
+      }
+    }
   </script>
 </body>
 </html>
