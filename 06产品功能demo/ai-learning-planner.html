@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能规划</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fef6f0 50%, #f0f4ff 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .header-left:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .semester-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .semester-dropdown:hover {
+            background: #f5f5f5;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            padding: 24px;
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            width: 320px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Learning Goal */
+        .goal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .goal-text {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .edit-icon {
+            color: #4a90d9;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .subject-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .subject-badge {
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .subject-badge.math {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+        }
+
+        .subject-badge.chinese {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+        }
+
+        .subject-badge.english {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .subject-badge.physics {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .subject-badge.chemistry {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+
+        .subject-badge.biology {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        /* Learning Stats */
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 24px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .stat-unit {
+            font-size: 18px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .stat-change.negative {
+            color: #4a90d9;
+        }
+
+        .stat-change.positive {
+            color: #ff6b35;
+        }
+
+        /* Chart Section */
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .chart-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #4a90d9;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.orange {
+            background: #ff9a56;
+        }
+
+        .legend-dot.blue {
+            background: #4a90d9;
+        }
+
+        .chart-container {
+            height: 160px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 0 20px;
+        }
+
+        .chart-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bars {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            height: 120px;
+        }
+
+        .bar {
+            width: 32px;
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        .bar.orange {
+            background: linear-gradient(180deg, #ffb380 0%, #ff9a56 100%);
+        }
+
+        .bar.blue {
+            background: linear-gradient(180deg, #6bb3f0 0%, #4a90d9 100%);
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chart-label {
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* Score Curve Chart */
+        .score-curve-section {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .score-curve-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .score-curve-title span {
+            font-weight: 400;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .score-curve-container {
+            height: 120px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .score-curve-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .curve-x-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #999;
+            padding: 0 10px;
+        }
+
+        .curve-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+
+        .curve-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .curve-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .curve-legend-dot.math { background: #ff6b35; }
+        .curve-legend-dot.chinese { background: #4a90d9; }
+        .curve-legend-dot.english { background: #10b981; }
+        .curve-legend-dot.physics { background: #8b5cf6; }
+        .curve-legend-dot.chemistry { background: #06b6d4; }
+        .curve-legend-dot.biology { background: #f59e0b; }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Date Tabs */
+        .date-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .date-tab {
+            padding: 16px 32px;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .date-tab:hover {
+            border-color: #e0e0e0;
+        }
+
+        .date-tab.active {
+            border-color: #4a90d9;
+            background: linear-gradient(180deg, #f8fbff 0%, #fff 100%);
+        }
+
+        .date-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .date-label {
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .section-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .section-content p {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #4a90d9;
+        }
+
+        .key-action {
+            margin-bottom: 12px;
+        }
+
+        .key-action strong {
+            color: #1a1a1a;
+        }
+
+        /* Task List */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .task-item:hover {
+            background: #f0f4ff;
+            transform: translateX(4px);
+        }
+
+        .task-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-badge {
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .task-badge.math {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+        }
+
+        .task-badge.english {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .task-badge.biology {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .task-title {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .task-btn {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+            border: none;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .task-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .task-btn.completed {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 8px 0;
+            min-width: 160px;
+            display: none;
+            z-index: 100;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f5f5;
+        }
+
+        .dropdown-item.active {
+            color: #4a90d9;
+            font-weight: 500;
+        }
+
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .date-tabs {
+                flex-wrap: wrap;
+            }
+
+            .date-tab {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left" onclick="goBack()">
+            <span class="back-arrow">&lt;</span>
+            <span class="header-title">AI智能规划</span>
+        </div>
+        <div class="dropdown-wrapper">
+            <div class="semester-dropdown" onclick="toggleDropdown()">
+                <span id="currentSemester">高一下学期</span>
+                <span class="dropdown-arrow" id="dropdownArrow">▼</span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="dropdown-item" onclick="selectSemester('高一上学期')">高一上学期</div>
+                <div class="dropdown-item active" onclick="selectSemester('高一下学期')">高一下学期</div>
+                <div class="dropdown-item" onclick="selectSemester('高二上学期')">高二上学期</div>
+                <div class="dropdown-item" onclick="selectSemester('高二下学期')">高二下学期</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- Learning Goal Card -->
+            <div class="card">
+                <div class="card-title">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="#4a90d9" stroke-width="2"/>
+                        <path d="M8 12l3 3 5-6" stroke="#4a90d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    本期学习目标：
+                </div>
+                <div class="goal-header">
+                    <span class="goal-text">期末成绩稳步提升</span>
+                    <span class="edit-icon">✏️</span>
+                </div>
+                <div class="subject-tags">
+                    <span class="subject-badge math">数学</span>
+                    <span class="subject-badge english">英语</span>
+                    <span class="subject-badge biology">生物</span>
+                </div>
+            </div>
+
+            <!-- Learning Profile Card -->
+            <div class="card">
+                <div class="card-title">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="4" width="18" height="16" rx="2" stroke="#4a90d9" stroke-width="2"/>
+                        <path d="M7 8h10M7 12h6" stroke="#4a90d9" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    学习档案
+                </div>
+
+                <div class="section-subtitle">个人学情（近2周）</div>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-value">68<span class="stat-unit">%</span></div>
+                        <div class="stat-label">作业完成率</div>
+                        <div class="stat-change negative">较均值-3%↓</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">74<span class="stat-unit">%</span></div>
+                        <div class="stat-label">平均正确率</div>
+                        <div class="stat-change positive">较均值+13%↑</div>
+                    </div>
+                </div>
+
+                <div class="chart-header">
+                    <span class="chart-title">练习数据（近2周）</span>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot orange"></span>
+                            <span>答对数</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot blue"></span>
+                            <span>答题数</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-group">
+                        <div class="bars">
+                            <div class="bar orange" style="height: 86px;" data-value="302">
+                                <span class="bar-value">302</span>
+                            </div>
+                            <div class="bar blue" style="height: 100px;" data-value="350">
+                                <span class="bar-value">350</span>
+                            </div>
+                        </div>
+                        <span class="chart-label">04.06</span>
+                    </div>
+                    <div class="chart-group">
+                        <div class="bars">
+                            <div class="bar orange" style="height: 98px;" data-value="342">
+                                <span class="bar-value">342</span>
+                            </div>
+                            <div class="bar blue" style="height: 100px;" data-value="350">
+                                <span class="bar-value">350</span>
+                            </div>
+                        </div>
+                        <span class="chart-label">04.13</span>
+                    </div>
+                </div>
+
+                <!-- Score Curve Section -->
+                <div class="score-curve-section">
+                    <div class="score-curve-title">成绩曲线 <span>（得分率）</span></div>
+                    <div class="score-curve-container">
+                        <svg class="score-curve-svg" viewBox="0 0 280 100" preserveAspectRatio="none">
+                            <!-- Grid lines -->
+                            <line x1="0" y1="25" x2="280" y2="25" stroke="#f0f0f0" stroke-width="1"/>
+                            <line x1="0" y1="50" x2="280" y2="50" stroke="#f0f0f0" stroke-width="1"/>
+                            <line x1="0" y1="75" x2="280" y2="75" stroke="#f0f0f0" stroke-width="1"/>
+
+                            <!-- Math curve (orange) -->
+                            <polyline fill="none" stroke="#ff6b35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,60 47,55 94,50 141,45 188,40 235,35 280,30"/>
+
+                            <!-- Chinese curve (blue) -->
+                            <polyline fill="none" stroke="#4a90d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,50 47,48 94,52 141,45 188,42 235,38 280,35"/>
+
+                            <!-- English curve (green) -->
+                            <polyline fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,70 47,65 94,58 141,52 188,48 235,42 280,38"/>
+
+                            <!-- Physics curve (purple) -->
+                            <polyline fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,55 47,58 94,52 141,48 188,50 235,45 280,40"/>
+
+                            <!-- Chemistry curve (cyan) -->
+                            <polyline fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,65 47,60 94,55 141,58 188,52 235,48 280,45"/>
+
+                            <!-- Biology curve (yellow) -->
+                            <polyline fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                points="0,75 47,70 94,62 141,55 188,50 235,45 280,42"/>
+                        </svg>
+                    </div>
+                    <div class="curve-x-labels">
+                        <span>3月</span>
+                        <span>4月</span>
+                        <span>5月</span>
+                        <span>6月</span>
+                        <span>7月</span>
+                        <span>8月</span>
+                    </div>
+                    <div class="curve-legend">
+                        <div class="curve-legend-item"><span class="curve-legend-dot math"></span>数学</div>
+                        <div class="curve-legend-item"><span class="curve-legend-dot chinese"></span>语文</div>
+                        <div class="curve-legend-item"><span class="curve-legend-dot english"></span>英语</div>
+                        <div class="curve-legend-item"><span class="curve-legend-dot physics"></span>物理</div>
+                        <div class="curve-legend-item"><span class="curve-legend-dot chemistry"></span>化学</div>
+                        <div class="curve-legend-item"><span class="curve-legend-dot biology"></span>生物</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content">
+            <!-- Date Tabs -->
+            <div class="date-tabs">
+                <div class="date-tab active" onclick="selectDate(this, 0)">
+                    <div class="date-value">2025.04.27</div>
+                    <div class="date-label">期中考试后阶段规划</div>
+                </div>
+                <div class="date-tab" onclick="selectDate(this, 1)">
+                    <div class="date-value">2025.03.25</div>
+                    <div class="date-label">月考后阶段规划</div>
+                </div>
+                <div class="date-tab" onclick="selectDate(this, 2)">
+                    <div class="date-value">2025.02.15</div>
+                    <div class="date-label">新学期新起点</div>
+                </div>
+            </div>
+
+            <!-- Content Card -->
+            <div class="content-card">
+                <h1 class="content-title" id="planTitle">期中考试后阶段规划</h1>
+
+                <div class="section">
+                    <h2 class="section-title">【综述】</h2>
+                    <div class="section-content">
+                        <p>你正处于高中学习的关键过渡期，距离期末考试还有133天，时间充裕但需高效利用。你的目标是期末成绩大幅提升20%，这是一个积极且可实现的挑战。通过聚焦<span class="highlight">数学、英语和生物</span>这三门主攻学科，结合系统规划和每日坚持，你完全能在逻辑思维、语言积累和概念理解上取得突破。保持自信和自律，每天进步一点点，积累起来就是巨大的飞跃。加油，相信你能在期末实现质的飞跃！</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">【学习策略&得分策略】</h2>
+                    <div class="section-content">
+                        <p>首先，明确主攻学科：<span class="highlight">数学、英语和生物</span>。数学作为核心逻辑学科，提分空间大且是高考重点；英语重长期积累，基础薄弱影响总分；生物概念密集，通过系统复习可快速提升。</p>
+                        <br>
+                        <p><strong>针对数学：</strong></p>
+                        <p>• 学习方法：每天做30分钟基础题（如代数和解几何），强化公式应用（如 的求解），使用错题本记录常见错误。</p>
+                        <p>• 提分策略：专选选择题和填空题，这些题型占比高、易得分，避免在难题上过度耗时；考试时先易后难，确保基础分不丢。</p>
+                        <br>
+                        <p><strong>针对英语：</strong></p>
+                        <p>• 学科特性：英语重词汇和句型积累，每日阅读一篇短文（如新闻或故事），重点记忆高频短语和高级表达。</p>
+                        <p>• 考试得分策略：强化阅读理解，练习快速定位关键信息；写作部分多用模板句，提升答题速度和准确性。</p>
+                        <br>
+                        <p><strong>针对生物：</strong></p>
+                        <p>• 学科常见挑战：知识点多且易混淆，每周整理一章核心概念（如细胞结构或遗传规律），制作思维导图辅助记忆。</p>
+                        <p>• 能力板块提升：加强选择题训练，确保概念清晰；简答题侧重逻辑表述，通过真题模拟提升应试技巧。</p>
+                        <br>
+                        <p><strong>跨学科融合：</strong>利用英语阅读材料中的科学内容辅助生物复习，同时数学的逻辑训练可提升整体分析能力。制定每日学习表，均衡三科时间，确保133天持续进步。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">【本阶段规划】</h2>
+                    <div class="section-content">
+                        <p><strong>核心目标（Object）：夯实学科基础</strong></p>
+                        <p>通过133天系统学习，在<span class="highlight">数学、英语、生物三科</span>实现期末成绩大幅提升，为高二打下坚实基础。</p>
+                        <br>
+                        <p><strong>关键动作（Key Action）：</strong></p>
+                        <div class="key-action">
+                            <p><strong>KA1 · 数学每日练：</strong>每天做30分钟基础题，巩固公式应用和解题技巧。</p>
+                        </div>
+                        <div class="key-action">
+                            <p><strong>KA2 · 英语词汇积累：</strong>每日背诵20个新单词和短语，强化阅读和写作基础。</p>
+                        </div>
+                        <div class="key-action">
+                            <p><strong>KA3 · 生物概念梳理：</strong>每周整理一章生物知识框架，构建清晰概念体系。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">【详细学习任务】</h2>
+                    <div class="section-content">
+                        <p>结合本阶段规划，AI将为你定期更新详细的智能规划任务，坚持完成任务还有机会获得更多成就勋章哦。</p>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge math">数学</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">个性化学练-同名诱导公式使用正确与否的判断强化训练*10题</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge math">数学</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">举一反三-基本初等函数的导数同类题巩固练</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge english">英语</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">每日单词：相信积累的力量~</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge english">英语</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">专项练习：词法-非谓语相关考点精...</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge biology">生物</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">消灭错题本，原题重练训练题感！</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-left">
+                                <span class="task-badge biology">生物</span>
+                                <span class="ai-badge">AI</span>
+                                <span class="task-title">举一反三，触类旁通解决错题~</span>
+                            </div>
+                            <button class="task-btn" onclick="completeTask(this)">去完成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Plan data for different dates
+        const planData = [
+            {
+                title: '期中考试后阶段规划',
+                date: '2025.04.27'
+            },
+            {
+                title: '月考后阶段规划',
+                date: '2025.03.25'
+            },
+            {
+                title: '新学期新起点规划',
+                date: '2025.02.15'
+            }
+        ];
+
+        // Toggle dropdown menu
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            const arrow = document.getElementById('dropdownArrow');
+            menu.classList.toggle('show');
+            arrow.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const wrapper = document.querySelector('.dropdown-wrapper');
+            if (!wrapper.contains(e.target)) {
+                document.getElementById('dropdownMenu').classList.remove('show');
+                document.getElementById('dropdownArrow').classList.remove('open');
+            }
+        });
+
+        // Select semester
+        function selectSemester(semester) {
+            document.getElementById('currentSemester').textContent = semester;
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.textContent === semester) {
+                    item.classList.add('active');
+                }
+            });
+            toggleDropdown();
+            showToast(`已切换到 ${semester}`);
+        }
+
+        // Select date tab
+        function selectDate(element, index) {
+            document.querySelectorAll('.date-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            element.classList.add('active');
+            document.getElementById('planTitle').textContent = planData[index].title;
+            showToast(`正在查看 ${planData[index].date} 的规划`);
+        }
+
+        // Complete task
+        function completeTask(button) {
+            if (button.classList.contains('completed')) {
+                button.classList.remove('completed');
+                button.textContent = '去完成';
+                showToast('已取消完成状态');
+            } else {
+                button.classList.add('completed');
+                button.textContent = '已完成';
+                showToast('任务已完成！继续加油！');
+            }
+        }
+
+        // Go back
+        function goBack() {
+            showToast('返回上一页');
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Bar chart hover effect
+        document.querySelectorAll('.bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function() {
+                const value = this.dataset.value;
+                showToast(`数值: ${value}`);
+            });
+        });
+    </script>
+</body>
+</html>
